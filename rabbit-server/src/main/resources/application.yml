@@ -1,0 +1,47 @@
+#spring:
+#  rabbitmq:
+#    addresses: 127.0.0.1:5672 #指定client连接到的server的地址，多个以逗号分隔(优先取addresses，然后再取host)
+#      #    port:
+#    ##集群配置 addresses之间用逗号隔开
+#    # addresses: ip:port,ip:port
+#    username: admin
+#    password: 123456
+#    virtual-host: / # 连接到rabbitMQ的vhost
+#    requested-heartbeat: 60000 #指定心跳超时，单位秒，0为不指定；默认60s
+#    publisher-returns: true # 是否启用发布返回
+#    connection-timeout: 10000 #连接超时，单位毫秒，0表示无穷大，不超时
+#    cache:
+#      channel:
+#        size: 10  # 缓存中保持的channel数量
+#        checkout-timeout: 10000 # 当缓存数量被设置时，从缓存中获取一个channel的超时时间，单位毫秒；如果为0，则总是创建一个新channel
+#      connection:
+#        size: 10 # 缓存的连接数，只有是CONNECTION模式时生效
+#        mode: channel # 连接工厂缓存模式：CHANNEL 和 CONNECTION
+#    listener:
+#      simple:
+#        auto-startup: true # 是否启动时自动启动容器
+#        acknowledge-mode: auto # 表示消息确认方式，其有三种配置方式，分别是none、manual和auto；默认auto
+#        concurrency: 1 # 最小的消费者数量
+#        max-concurrency: 1 # 最大的消费者数量
+#        prefetch: 1 # 指定一个请求能处理多少个消息，如果有事务的话，必须大于等于transaction数量.
+#        #transaction-size: 1 # 指定一个事务处理的消息数量，最好是小于等于prefetch的数量.
+#        default-requeue-rejected: true # 决定被拒绝的消息是否重新入队；默认是true（与参数acknowledge-mode有关系）
+#        idle-event-interval: 10000 # 多少长时间发布空闲容器时间，单位毫秒
+#        retry:
+#          enabled: true # 监听重试是否可用
+#          max-attempts: 3 # 最大重试次数
+#          initial-interval: 1000 # 第一次和第二次尝试发布或传递消息之间的间隔
+#          multiplier: 1 # 应用于上一重试间隔的乘数
+#          max-interval: 10000 # 最大重试时间间隔
+#          stateless: true # 重试是有状态or无状态
+#    template:
+#      mandatory: true # 启用强制信息；默认false
+#      receive-timeout:  10000 # receive() 操作的超时时间
+#      reply-timeout: 10000 # sendAndReceive() 操作的超时时间
+#      retry:
+#
+#        enabled: true  #发送重试是否可用
+#        max-attempts: 3 # 最大重试次数
+#        initial-interval: 1000 # 第一次和第二次尝试发布或传递消息之间的间隔
+#        multiplier: 1 #应用于上一重试间隔的乘数
+#        max-interval: 10000 #最大重试时间间隔

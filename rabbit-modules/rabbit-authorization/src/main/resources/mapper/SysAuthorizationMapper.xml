@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phoenix.rabbitauthorization.mapper.SysAuthorizationMapper">
+
+    <insert id="insert">
+        insert into sys_authorization(
+            companyName,
+            appId,
+            accessKey,
+            createTime,
+            status
+        )VALUE (
+            #{companyName,jdbcType=VARCHAR},
+            #{appId,jdbcType=VARCHAR},
+            #{accessKey,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{status,jdbcType=INTEGER}
+        )
+    </insert>
+</mapper>

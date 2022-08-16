@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phoenix.rabbitserver.mapper.MessageMapper">
+
+    <insert id="insert">
+        insert into sys_message(
+            msgId,
+            exchange,
+            routingKey,
+            message,
+            status,
+            code,
+            create_date
+        )VALUE (
+            #{msgId,jdbcType=VARCHAR},
+            #{exchange,jdbcType=VARCHAR},
+            #{routingKey,jdbcType=VARCHAR},
+            #{message,jdbcType=VARCHAR},
+            #{status,jdbcType=INTEGER},
+            #{code,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update">
+        update sys_message
+        <set>
+            <if test="exchange != null and exchange != ''">
+                exchange = #{exchange},
+            </if>
+            <if test="routingKey != null and routingKey != ''">
+                routingKey = #{routingKey},
+            </if>
+            <if test="message != null and message != ''">
+                message = #{message},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+        </set>
+        where msgId = #{msgId}
+    </update>
+</mapper>

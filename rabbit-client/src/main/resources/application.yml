@@ -1,0 +1,34 @@
+server:
+    port: 8081
+    servlet:
+        context-path: /
+spring:
+    profiles:
+        active: dev
+    application:
+        name: mq-client
+    rabbitmq:
+        # addresses: 127.0.0.1:5672
+        host: 127.0.0.1
+        port: 5672
+        username: admin
+        password: 123456
+        # 发送回调
+        publisher-returns: true
+        # 发送确认
+        publisher-confirm-type: correlated
+        listener:
+            simple:
+                acknowledge-mode: manual # 手动确认
+                retry:
+                    enabled: true # 监听重试是否可用
+                    initial-interval: 4000 # 重试间隔,单位为毫秒
+                    max-attempts: 3 # 重试最大次数
+                default-requeue-rejected: true # 重试次数超过上面的设置之后是否丢弃（false不丢弃是需要写相应的代码将消息转发入死信队列）
+        template:
+            mandatory: true
+mybatis:
+    type-aliases-package: com.phoenix.**.entity
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath*:mapper/*Mapper.xml
+    configLocation: classpath:mybatis/mybatis-config.xml
